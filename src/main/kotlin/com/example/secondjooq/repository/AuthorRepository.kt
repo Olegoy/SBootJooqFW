@@ -133,13 +133,22 @@ class AuthorRepository(private val context: DSLContext, private val mapper: Auth
     }
 
 
-    //работает, с применением маппинга
+    //работает, с применением маппера и let
     fun findByIdWithArticlesMap(id: Int): AuthorWithArticles? {
         return context
                 .selectFrom(Author.AUTHOR)
                 .where(Author.AUTHOR.ID.eq(id))
                 .fetchAny()
-                ?.let{mapper.map(it)}
+                ?.let { mapper.map(it) }
+    }
+
+    //работает, с применением маппера и map
+    fun findByIdWithArticlesMapJooq(id: Int): AuthorWithArticles? {
+        return context
+                .selectFrom(Author.AUTHOR)
+                .where(Author.AUTHOR.ID.eq(id))
+                .fetchAny()
+                ?.map { mapper.map(it as AuthorRecord) }
     }
 
 
