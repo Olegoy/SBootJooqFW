@@ -132,6 +132,8 @@ class AuthorRepository(private val context: DSLContext, private val mapper: Auth
                 }.toList()
     }
 
+
+    //работает, с применением маппинга
     fun findByIdWithArticlesMap(id: Int): AuthorWithArticles? {
         return context
                 .selectFrom(Author.AUTHOR)
